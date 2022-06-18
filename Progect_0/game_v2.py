@@ -2,7 +2,7 @@
 
 import numpy as np
 
-def random_predict(number:int=1) -> int:
+def random_predict(number:int=np.random.randint(1,100)) -> int:
     """Рандомно угадываем число
 
     Args:
@@ -13,19 +13,29 @@ def random_predict(number:int=1) -> int:
     """
     
     count=0
+    max=100
+    min=0
+    predict_number=np.random.randint(1,100) #предполагаемое число
     
     while True:
         count+=1
-        predict_number=np.random.randint(1,101) #предлагаемое число
-        if number==predict_number:
-            break #выход из цикла если угадали
+        
+        if predict_number>number:
+            max=predict_number-1
+            predict_number=(max+min)//2
+        elif predict_number<number:
+            min=predict_number+1
+            predict_number=(max+min)//2
+        else:
+            break #выход из цикла eсли угадали
+        print(predict_number,number)
     return(count)
 
 def score_game(random_predict) ->int:
-    """Среднее количество попыток за 1000 подходов угадывает наш алгоритм число 
+    """Среднее количество попыток за 100 подходов угадывает наш алгоритм число 
 
     Args:
-        random_predict (_type_): функция угадывания
+        random_predict ([type]): функция угадывания
 
     Returns:
         int: среднее количество попыток
@@ -33,17 +43,23 @@ def score_game(random_predict) ->int:
     
     count_ls=[]
     np.random.seed(1)#используем сид для воспроизводимости
-    random_array=np.random.randint(1,101,size=(1000))#загадали список чисел
-                                   
+    random_array=np.random.randint(1,101,size=(250))#загадали список чисел
+    print(random_array)
+    Print(len(random_array))
+    
+    i=0                            
     for number in random_array:
-        count_ls.append(random_predict(number))
+        i+=1
         
-    score=int(np.mean(count_ls))
+    count_ls.append(random_predict(number))
+        print(count_ls)
+        print(i)
+        
+      score=int(np.mean(count_ls))
     print(f'Ваш алгоритм угадывает число в среднем за:{score}попыток')
     return(score)
 
-#RUN  
-if __name__=='__main__':
+
     score_game(random_predict)
 
 #print(f'Количество попыток:{random_predict(10)}')
