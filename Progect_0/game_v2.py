@@ -52,10 +52,10 @@ def score_game(random_predict) ->int:
         i+=1
         
     count_ls.append(random_predict(number))
-        print(count_ls)
-        print(i)
+    print(count_ls)
+    print(i)
         
-      score=int(np.mean(count_ls))
+    score=int(np.mean(count_ls))
     print(f'Ваш алгоритм угадывает число в среднем за:{score}попыток')
     return(score)
 
