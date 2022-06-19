@@ -45,7 +45,7 @@ def score_game(random_predict) ->int:
     np.random.seed(1)#используем сид для воспроизводимости
     random_array=np.random.randint(1,101,size=(250))#загадали список чисел
     print(random_array)
-    Print(len(random_array))
+    print(len(random_array))
     
     i=0                            
     for number in random_array:
@@ -60,6 +60,7 @@ def score_game(random_predict) ->int:
     return(score)
 
 
+if __name__=='__main__':
     score_game(random_predict)
 
 #print(f'Количество попыток:{random_predict(10)}')
